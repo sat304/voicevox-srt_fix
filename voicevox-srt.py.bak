@@ -72,7 +72,6 @@ def calculate_audio_duration(query):
     """
     if "accentPhrases" not in query:
         return 0.0
-    speedScale = query["speedScale"]
     total_duration = 0.0
     for phrase in query["accentPhrases"]:
         total_duration += sum(
@@ -82,7 +81,7 @@ def calculate_audio_duration(query):
         total_duration += phrase.get("pauseMora", {}).get("vowelLength", 0.0)
     total_duration += query.get("prePhonemeLength", 0.1)
     total_duration += query.get("postPhonemeLength", 1.0)
-    return round(total_duration / speedScale, 6)
+    return round(total_duration, 6)
 
 
 def format_srt_time(time_in_seconds):
